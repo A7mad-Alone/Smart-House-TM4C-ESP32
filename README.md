@@ -107,9 +107,11 @@ The full documentation explains:
 ### 👥 Contributors
 
 - **Ahmad Adham Badawy**  
+
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ahmad-adham-badawy/)
 
 - **Ali Abd El Nasser Ali**  
+
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ali-abd-el-nasser-ali-970236363/)
 
 - **Abdallah Fahmy Rabea**
@@ -127,10 +129,12 @@ The full documentation explains:
 - **Mostafa Roshdy**
 
 
-Instructor: Dr. Ahmad Sayed  
-Teaching Assistant: Eng. Fatma Sharawy  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/fatma-sharawy-279ba3164/)
-Course: ECE4206 – Intro to Microprocessors (AASTMT)
+- Instructor: Dr. Ahmad Sayed  
+- Teaching Assistant: Eng. Fatma Sharawy  
+
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/fatma-sharawy-279ba3164/)
+
+- Course: ECE4206 – Intro to Microprocessors (AASTMT)
 
 ---
 
