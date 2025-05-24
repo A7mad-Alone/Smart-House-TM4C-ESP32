@@ -129,6 +129,7 @@ The full documentation explains:
 
 Instructor: Dr. Ahmad Sayed  
 Teaching Assistant: Eng. Fatma Sharawy  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/fatma-sharawy-279ba3164/)
 Course: ECE4206 – Intro to Microprocessors (AASTMT)
 
 ---
