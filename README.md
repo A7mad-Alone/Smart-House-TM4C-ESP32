@@ -33,19 +33,48 @@ The project demonstrates a scalable smart home system that automates and monitor
 | **HTML + JavaScript** | Frontend interface hosted on ESP32 |
 
 ---
+### 📁 Repository Structure
 
-## 📁 Repository Structure
-
+```plaintext
 /SmartHouse/
+├── tiva c codes/
+│   ├── launchpadcode_1/
+│   ├── launchpadcode_2/
+│   ├── ultrasonic/
+│   ├── launchpadcode_3/
+│   └── libraries/
+│       └── TivaCPinMap/
 │
-├── TivaC_Code/ # Embedded C code for TM4C123GXL
-│ └── ...
-├── ESP32_Code/ # Arduino-based code for ESP32
-│ └── ...
-├── README.md # This file
-└── LICENSE # Open-source license (optional)
+├── esp32 codes/
+│   ├── esp32webinterface_1/
+│   ├── esp32webinterface_2/
+│   ├── esp32webinterface_3/
+│   ├── esp32webinterface_4/
+│   ├── esp32webinterface_5/
+│   └── esp32webinterface_6/
+│
+├── PIOcoding/
+├── Report PDFs (Drafts)/
+├── Report Refrences & Inspiration/
+├── TM4C123GXL - Datasheets & Pinouts/
+├── Report DOCXs & Info (Drafts)/
+├── Canceled/
+│
+├── README.md
+└── LICENSE
+```
+#### 📦 Folder Descriptions
 
-
+- **`tiva c codes/`** – Code for TM4C123GXL microcontroller (Tiva C).
+- **`esp32 codes/`** – ESP32 Arduino sketches handling web dashboard and comms.
+- **`PIOcoding/`** – PlatformIO project files for uploading to ESP32.
+- **`Report PDFs (Drafts)/`** – Project report PDF versions.
+- **`Report DOCXs & Info (Drafts)/`** – Editable DOCX files and notes.
+- **`Report Refrences & Inspiration/`** – Research sources, similar projects, external docs.
+- **`TM4C123GXL - Datasheets & Pinouts/`** – Reference sheets and pinout guides.
+- **`Canceled/`** – Deprecated or removed content.
+- **`README.md`** – Main documentation file (this file).
+- **`LICENSE`** – MIT License file.
 ---
 
 ## 📝 Report Summary
@@ -75,15 +104,28 @@ The full documentation explains:
 
 ## 📬 Contact & Contributors
 
-- **Ahmad Adham Badawy**
-- **Ali Abd El Nasser Ali**
+### 👥 Contributors
+
+- **Ahmad Adham Badawy**  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ahmad-adham-badawy/)
+
+- **Ali Abd El Nasser Ali**  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ali-abd-el-nasser-ali-970236363/)
+
 - **Abdallah Fahmy Rabea**
+
 - **Abdelrahman Mostafa**
+
 - **Eslam Mohammed**
+
 - **Mohamed Sayed**
+
 - **Abdelrahman Hamdy**
+
 - **Mohammed Ehab Badr**
+
 - **Mostafa Roshdy**
+
 
 Instructor: Dr. Ahmad Sayed  
 Teaching Assistant: Eng. Fatma Sharawy  
@@ -91,15 +133,13 @@ Course: ECE4206 – Intro to Microprocessors (AASTMT)
 
 ---
 
-## 📌 Notes
+### 📌 Notes
 
 - All hardware explanations and planning considerations are included in the attached report PDF.
 - This repo is designed for educational purposes and can be extended into a production-grade system with cloud connectivity, mobile app integration, and advanced control logic.
 
 ---
+### 📄 License
 
-## 📄 License
-
-This project is for academic demonstration only. If you wish to reuse parts of the code or design, please give proper credit to the contributors.
-
+This project is licensed under the MIT License — you are free to use, modify, and distribute the code with proper credit. While this is an open-source academic project, we kindly ask that you acknowledge the original contributors if reusing or building upon this work.
 
