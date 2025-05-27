@@ -106,7 +106,7 @@ The full documentation explains:
 
 ### 👥 Contributors
 
-- **Ahmad Adham Badawy**  
+- **Ahmad Adham Badawy**  (Me :D)
 
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ahmad-adham-badawy/)
 
@@ -114,11 +114,16 @@ The full documentation explains:
 
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ali-abd-el-nasser-ali-970236363/)
 
-- **Abdallah Fahmy Rabea**
+- **Eslam Mohammed**
+  
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/eslam-mohammed-abdelkader)
+  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/Eslam-Mohammed198)
 
 - **Abdelrahman Mostafa**
 
-- **Eslam Mohammed**
+  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/Abd0M0stafa)
+  
+- **Abdallah Fahmy Rabea**
 
 - **Mohamed Sayed**
 
