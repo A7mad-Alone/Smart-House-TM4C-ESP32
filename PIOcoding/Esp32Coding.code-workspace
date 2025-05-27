@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "Esp32Coding",
+			"path": "Esp32Coding"
+		},
+		{
+			"path": "../esp32 codes"
+		}
+	],
+	"settings": {}
+}

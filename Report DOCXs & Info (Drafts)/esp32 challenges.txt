@@ -1,0 +1,78 @@
+Here’s a clean, well-structured version you can directly use in your project documentation:
+
+Web Dashboard Architecture and Implementation
+
+Overview
+
+The goal was to build a simple, interactive web dashboard hosted on the ESP32 to monitor and control a smart house system. The ESP32 would serve a webpage over Wi-Fi, display live sensor data, and allow users to send commands to the system (communicating with the TM4C123G microcontroller via UART).
+
+Challenges & Solutions for Dynamic Page Updates
+
+1. WebSockets (Initial Approach)
+
+Purpose: Enable real-time updates from the ESP32 to the web page.
+
+Issue: The ESP32 frequently crashed and rebooted during AP mode initialization.
+
+Cause: WebSocket handling overloaded the ESP32 (likely due to RAM constraints or poorly managed asynchronous callbacks).
+
+Outcome: Abandoned due to instability.
+
+2. MQTT (Alternative Attempt)
+
+Purpose: Use MQTT for lightweight, publish-subscribe communication to update the web page.
+
+Issue: Mobile MQTT clients failed to connect or receive data.
+
+Cause: Potential misconfiguration of the MQTT broker, port issues, or network isolation (ESP32 in AP mode).
+
+Outcome: Not used due to complexity and setup issues.
+
+3. Auto-Refreshing the Page
+
+Purpose: Periodically reload the web page to show updated data.
+
+Method: Used <meta http-equiv="refresh"> or location.reload() in JavaScript.
+
+Issue: Disrupted user input in the command textbox (typed text would be erased).
+
+Outcome: Dropped due to poor user experience.
+
+4. Final Implementation – AJAX Polling with fetch()
+
+Method: JavaScript on the page periodically sends fetch("/data") requests to get sensor data in JSON format and updates the DOM.
+
+Command Input: Separate fetch("/command", { method: "POST", body: ... }) used to send user commands without refreshing.
+
+Advantages: 
+
+Stable and lightweight for the ESP32.
+
+Smooth user experience with live updates every 2 seconds.
+
+Easily maintainable and readable.
+
+Fake Values for Testing (Before TM4C123G Integration)
+
+The ESP32 team completed their dashboard code before the TM4C microcontroller was fully functional.
+
+To enable early testing of the web interface, a "set" command was introduced via the command input. 
+
+Example: set temp 25 would force the temperature display to show 25°C.
+
+A "reset" command would revert the dashboard back to live (UART-based) values.
+
+This allowed full end-to-end testing of: 
+
+Data fetching and display
+
+Command handling
+
+Interface responsiveness
+
+Conclusion
+
+Despite being the first attempt at a web dashboard for the team, the final solution proved to be robust, easy to use, and maintainable. Early implementation and the use of simulated data allowed the team to validate the dashboard independently of hardware readiness. While advanced options like WebSockets and MQTT were explored, the final AJAX polling approach provided the best balance between simplicity and reliability on the ESP32 platform.
+
+Let me know if you’d like this exported as a PDF, or if you want a diagram of how each component interacts (ESP32, dashboard, TM4C, etc.).
+
