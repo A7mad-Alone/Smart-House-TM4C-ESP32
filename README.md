@@ -1,155 +1,126 @@
 # 🏠 Smart House Project (TM4C123G + ESP32)
 
-This repository contains the full source code and interface files for our Smart House project, developed using the TM4C123GXL LaunchPad and ESP32 microcontroller as part of the *Intro to Microprocessors* course at AASTMT.
+> [!CAUTION]
+> ### ⚠️ PROJECT STATUS: ABANDONED
+> This project is no longer maintained and is kept for archival and educational purposes. It was originally developed as part of a university course. This project was not a 100% completed (functional) so this `readme.md` file is describing the vision so that anyone can continue working on it.
 
-> 📄 The full system design, explanation, and documentation are available in the project report. This GitHub repository focuses exclusively on the codebase.
+This repository contains the full source code and interface files for our Smart House project, developed using the **TM4C123GXL LaunchPad** and **ESP32** microcontroller as part of the *Intro to Microprocessors* (ECE4206) course at AASTMT.
+
+> 📄 **Note:** The full system design and theoretical explanations are available in the project report (see `MicroProcessor Project Report Pre-Final.pdf`). This GitHub repository focuses on the firmware and software implementation.
 
 ---
 
 ## 📘 Project Overview
 
-The project demonstrates a scalable smart home system that automates and monitors both indoor and outdoor environments. It integrates real-time sensing, wireless data transmission, and visual/audio alerts using embedded systems.
+This project demonstrates a scalable smart home system that integrates real-time sensing, wireless monitoring, and automation. The system uses a **TM4C123G** for low-level sensor interfacing and control, and an **ESP32** for Wi-Fi connectivity and a web-based dashboard.
 
-### 👇 Key Functionalities
-- **Garden Automation**: Watering system based on soil moisture; water tank level display.
-- **Room Monitoring**:
-  - Motion-based lighting (PIR sensor)
-  - Light-based dimming (LDR + LED)
-  - Temperature and flame detection (LM35 + Fire Sensor)
-  - Centralized RGB LED + Buzzer alerts
-- **Security**: Intrusion detection using a laser + LDR sensor
-- **Parking System**: Ultrasonic sensor with proximity-based alerts
-- **Web Dashboard**: Hosted on ESP32 for live monitoring over Wi-Fi
+### 🏗️ System Architecture & Logic
+
+The project is conceptually divided into specific zones, each handling a distinct subsystem:
+
+| Zone | Functionality | Sensors/Actuators |
+| :--- | :--- | :--- |
+| **Room 1** | **Auto-Lighting** | PIR Motion Sensor → LED ON/OFF |
+| **Room 2** | **Smart Dimming** | LDR Sensor → LED Brightness (PWM) |
+| **Room 3** | **Safety Monitoring** | Flame Sensor → LED ON/OFF |
+| **Room 4** | **Central Control** | RGB LED + Buzzer (Alerts) + Tiva C & ESP32 |
+| **Entrance** | **Intrusion Detection** | Laser Module + LDR (Tripwire) |
+| **Garden** | **Auto-Irrigation** | Soil Moisture Sensor → Water Pump (via 2N2222) |
+| **Garage** | **Smart Parking** | Ultrasonic Sensor → Distance-based Alerts |
+
+### 🚨 Alert System Logic
+
+The system uses a centralized notification system (RGB LED + Buzzer) to communicate status:
+
+| Condition | RGB LED Color | Buzzer Pattern |
+| :--- | :--- | :--- |
+| **High Temp** (>30°C) | 🟠 **Orange** | Constant Tone |
+| **Fire Detected** | 🔴 **Crimson** | Fast Pulsing |
+| **Intrusion** | 🟣 **Purple** | Fast Pulsing |
+| **Car Parking** | 🟡 → 🔴 **Gradient** | Freq. increases with proximity |
 
 ---
 
-## ⚙️ Technologies Used
+## ⚠️ Known Limitations & Demo Status
 
-| Component | Role |
-|----------|------|
-| **TM4C123GXL (Tiva C LaunchPad)** | Sensor reading, local control, serial communication |
-| **ESP32** | Wi-Fi access point + Web dashboard UI |
-| **UART (Serial Communication)** | JSON-based data exchange between TM4C and ESP32 |
-| **HTML + JavaScript** | Frontend interface hosted on ESP32 |
+While the project provides a comprehensive codebase, users should be aware of the following based on the final demo results:
+
+- **LCD Display**: The physical 16x2 I2C LCD was deprecated in the final demo due to timing issues and hardware constraints. All data visualization is primarily handled via the **Web Dashboard**.
+- **Theoretical vs. Practical**: The demo focuses on individual room functions. In a real-world scenario, sensors would be redundant across all rooms, which was not implemented due to budget and time limitations.
+- **Hardware Stability**: Serial communication (UART) between the two microcontrollers is sensitive to wiring quality and requires the **Logic Level Shifter** for stable data exchange.
 
 ---
-### 📁 Repository Structure
+
+## ⚙️ Hardware & Technologies
+
+| Component | Role | Note |
+| :--- | :--- | :--- |
+| **TM4C123GXL** | Main Microcontroller | Handles all sensors/actuators logic. |
+| **ESP32-S** | Wi-Fi Module | Hosts Web Dashboard & AP. |
+| **Logic Level Shifter** | **CRITICAL** | Converts some sensors' 5V UART signals to ESP32's and Tiva's 3.3V. |
+| **2N2222 Transistor** | Power Driver | Drives the water pump (high current). |
+| **Sensors** | PIR, LM35, LDR, Flame, Soil Moisture, Ultrasonic | Standard analog/digital modules. |
+| **Actuators** | 5V DC Motor (Pump), Buzzer, RGB LED, Laser | |
+
+---
+
+## 📁 Repository Structure
 
 ```plaintext
-/SmartHouse/
-├── tiva c codes/
-│   ├── launchpadcode_1/
-│   ├── launchpadcode_2/
-│   ├── ultrasonic/
-│   ├── launchpadcode_3/
-│   └── libraries/
-│       └── TivaCPinMap/
+/Smart-House-TM4C-ESP32/
+├── tiva c codes/                 # Source code for TM4C123GXL
+│   ├── launchpadcode_3/          # Main Tiva C firmware (Sensors & Logic)
+│   └── libraries/                # Custom libraries (e.g., PinMap)
 │
-├── esp32 codes/
-│   ├── esp32webinterface_1/
-│   ├── esp32webinterface_2/
-│   ├── esp32webinterface_3/
-│   ├── esp32webinterface_4/
-│   ├── esp32webinterface_5/
-│   └── esp32webinterface_6/
+├── esp32 codes/                  # Source code for ESP32
+│   ├── esp32webinterface_7/      # Latest Web Dashboard firmware
 │
-├── PIOcoding/
-├── Report PDFs (Drafts)/
-├── Report Refrences & Inspiration/
-├── TM4C123GXL - Datasheets & Pinouts/
-├── Report DOCXs & Info (Drafts)/
-├── Canceled/
-│
-├── README.md
-└── LICENSE
+├── Pics/                         # Photos of hardware, diagrams, and progress
+├── PIOcoding/                    # PlatformIO project files
+├── Report PDFs (Drafts)/         # Project reports and documentation
+└── TM4C123GXL - Datasheets.../   # Datasheets for the microcontroller
 ```
-#### 📦 Folder Descriptions
-
-- **`tiva c codes/`** – Code for TM4C123GXL microcontroller (Tiva C).
-- **`esp32 codes/`** – ESP32 Arduino sketches handling web dashboard and comms.
-- **`PIOcoding/`** – PlatformIO project files for uploading to ESP32.
-- **`Report PDFs (Drafts)/`** – Project report PDF versions.
-- **`Report DOCXs & Info (Drafts)/`** – Editable DOCX files and notes.
-- **`Report Refrences & Inspiration/`** – Research sources, similar projects, external docs.
-- **`TM4C123GXL - Datasheets & Pinouts/`** – Reference sheets and pinout guides.
-- **`Canceled/`** – Deprecated or removed content.
-- **`README.md`** – Main documentation file (this file).
-- **`LICENSE`** – MIT License file.
----
-
-## 📝 Report Summary
-
-The full documentation explains:
-
-- System infrastructure (Interior & Exterior electronics)
-- Demo vs Theoretical design differences
-- Sensors/actuators distribution per room
-- Alert system logic with RGB + buzzer
-- Communication architecture and power setup
-- Future expansion plans and challenges
-
-> ✅ Refer to the attached report for complete circuit diagrams, design rationale, planning logic, and hardware setup.
 
 ---
 
 ## 🚀 Getting Started
 
-1. Flash the Tiva C code using Code Composer Studio or Keil.
-2. Upload the ESP32 code using Arduino IDE.
-3. Power both boards via USB.
-4. Connect to the ESP32 Wi-Fi AP (default: `SmartHouse_AP`, password: `12345678`).
-5. Open your browser and navigate to `192.168.4.1` to access the dashboard.
+### 1. Hardware Setup
+- Connect sensors to the **TM4C123G** as defined in `tiva c codes/launchpadcode_3/launchpadcode_3.ino`.
+- Power both boards.
+
+### 2. Flashing the Code
+- **TM4C123G**: Open `tiva c codes/launchpadcode_3/launchpadcode_3.ino` in Energia (with TM4C support) and upload.
+- **ESP32**: Open `esp32 codes/esp32webinterface_7/src/main.cpp` in VS Code with PlatformIO Extension and upload.
+
+### 3. Accessing the Dashboard
+1.  Connect your phone/laptop to the Wi-Fi network:
+    - **SSID**: `SmartHouse_AP`
+    - **Password**: `12345678`
+2.  Open a web browser and go to: `http://192.168.4.1`
+3.  You should see the live dashboard! (didn't actually implement the logic of communicating the data between the 2 boards)
 
 ---
 
-## 📬 Contact & Contributors
+## 👥 Contributors
 
-### 👥 Contributors
+This project was built by a dedicated team for the **Intro to Microprocessors** course.
 
-- **Ahmad Adham Badawy**  (Me :D)
-
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ahmad-adham-badawy/)
-
-- **Ali Abd El Nasser Ali**  
-
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ali-abd-el-nasser-ali-970236363/)
-
-- **Eslam Mohammed**
-  
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/eslam-mohammed-abdelkader)
-  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/Eslam-Mohammed198)
-
-- **Abdelrahman Mostafa**
-
-  [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/Abd0M0stafa)
-  
+- **Ahmad Adham Badawy** - [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ahmad-adham-badawy/)
+- **Ali Abd El Nasser Ali** - [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/ali-abd-el-nasser-ali-970236363/)
 - **Abdallah Fahmy Rabea**
-
-- **Mohamed Sayed**
-
-- **Abdelrahman Hamdy**
-
+- **Abdelrahman Mostafa**
+- **Eslam Mohammed**
 - **Mohammed Ehab Badr**
 
-- **Mostafa Roshdy**
+**Supervision:**
+- **Instructor:** Dr. Ahmad Sayed
+- **Teaching Assistant:** Eng. Fatma Sharawy [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/fatma-sharaawy-279ba3164/)
 
-
-#### Instructor: Dr. Ahmad Sayed  
-#### Teaching Assistant: Eng. Fatma Sharawy  
-
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin)](https://www.linkedin.com/in/fatma-sharawy-279ba3164/)
-
-#### Course: ECE4206 – Intro to Microprocessors (AASTMT)
+### 💡 Inspiration & Credits
+This project draws conceptual inspiration from a previous multidisciplinary smart house system developed for the **AASTMT Smart House Competition** by Youssef Wagdi, Farida Hisham, Shady Magdy, and Basem Naeem.
 
 ---
 
-### 📌 Notes
-
-- All hardware explanations and planning considerations are included in the attached report PDF.
-- This repo is designed for educational purposes and can be extended into a production-grade system with cloud connectivity, mobile app integration, and advanced control logic.
-
----
 ### 📄 License
-
-This project is licensed under the MIT License — you are free to use, modify, and distribute the code with proper credit. While this is an open-source academic project, we kindly ask that you acknowledge the original contributors if reusing or building upon this work.
-
+This project is open-source and available under the **MIT License**.
